@@ -9,6 +9,6 @@ export default {
     return {
       title: this.$t('password.reset.title'),
     }
-  }
+  },
 }
 </script>

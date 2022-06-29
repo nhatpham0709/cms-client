@@ -30,7 +30,6 @@ export default {
   plugins: [
     // '@/plugins/loading',
     '@/plugins/vee-validate',
-    '@/plugins/vue-tailwind',
     '@/plugins/api.js',
   ],
 

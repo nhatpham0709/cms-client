@@ -1,4 +1,4 @@
-<template>  
+<template>
   <div
     class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
   >
@@ -44,7 +44,10 @@
         </div>
 
         <div class="text-sm">
-          <NuxtLink :to="localePath('/password/forget')" class="font-medium text-indigo-600 hover:text-indigo-500">
+          <NuxtLink
+            :to="localePath('/password/forget')"
+            class="font-medium text-indigo-600 hover:text-indigo-500"
+          >
             Forgot your password?
           </NuxtLink>
         </div>
