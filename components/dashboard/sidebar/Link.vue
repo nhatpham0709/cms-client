@@ -1,6 +1,6 @@
 <template>
   <li>
-    <router-link :to="to">
+    <NuxtLink :to="to">
       <div
         class="flex items-center justify-start my-1 p-3 w-full hover:text-white"
       >
@@ -8,7 +8,7 @@
           :class="$route.path === to && 'bg-gray-700 rounded-full'"
           class="p-2"
         >
-          <span><slot /></span>
+          <i :class="icon"></i>
         </div>
         <span
           class="mx-4 text-sm"
@@ -21,7 +21,7 @@
           {{ title }}
         </span>
       </div>
-    </router-link>
+    </NuxtLink>
   </li>
 </template>
 
@@ -35,6 +35,10 @@ export default {
       default: '',
     },
     title: {
+      type: String,
+      default: '',
+    },
+    icon: {
       type: String,
       default: '',
     },

@@ -23,8 +23,6 @@ export default {
   },
   watch: {
     $route() {
-      // close sidenav when you click on a sidenav item or on route change.
-      // set the html tag overflow to hidden
       document.documentElement.style.overflow = 'hidden'
       if (this.open === true) {
         this.open = false

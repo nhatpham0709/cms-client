@@ -2,7 +2,7 @@ import webpack from 'webpack'
 
 export default {
   head: {
-    title: 'nuxt-template',
+    title: 'Nuxt CMS',
     htmlAttrs: {
       lang: 'en',
     },
@@ -18,7 +18,7 @@ export default {
       { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
       {
         rel: 'stylesheet',
-        href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css',
+        href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css',
       },
     ],
   },
@@ -61,7 +61,7 @@ export default {
   auth: {
     resetOnError: true,
     cookie: {
-      prefix: 'user_auth',
+      prefix: 'cms_auth',
       options: {
         path: '/',
         maxAge: 60 * 60 * 24 * 7,

@@ -1,3 +1,13 @@
 <template>
-  <div>213231</div>
+  <Content title="Archives" />
 </template>
+
+<script>
+import Content from '@/components/Content.vue'
+
+export default {
+  components: {
+    Content,
+  },
+}
+</script>
