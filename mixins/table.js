@@ -9,14 +9,6 @@ export default {
         totalPages: 1,
         currentPage: 1,
       },
-      metaRequest: {
-        per_page: 10,
-        relationships: ['roles'],
-        order_column: 'created_at',
-        order_by: 'desc',
-        search_columns: ['first_name', 'last_name'],
-        keyword: '',
-      },
       submiting: false,
       modalId: '',
       modalTitle: '',
@@ -27,28 +19,31 @@ export default {
     }
   },
   async fetch() {
-    try {
-      const res = await this.$api.getData(
-        this.model,
-        this.meta.currentPage,
-        this.metaRequest
-      )
-      this.records = res.data.data
-      const pagination = res.data.meta.pagination
-      this.meta.from = pagination.from
-      this.meta.to = pagination.to
-      this.meta.total = pagination.total
-      this.meta.totalPages = pagination.total_pages
-      this.meta.currentPage = pagination.current_page
-    } catch (e) { }
+    await this.getData();
   },
   mounted() {
     this.modalDeleteId = `${this.model}-delete-modal`
   },
   methods: {
-    changePage(page) {
+    async getData() {
+      try {
+        const res = await this.$api.getData(
+          this.model,
+          this.meta.currentPage,
+          this.metaRequest
+        )
+        this.records = res.data
+        const pagination = res.meta.pagination
+        this.meta.from = pagination.from
+        this.meta.to = pagination.to
+        this.meta.total = pagination.total
+        this.meta.totalPages = pagination.total_pages
+        this.meta.currentPage = pagination.current_page
+      } catch (e) { }
+    },
+    async changePage(page) {
       this.meta.currentPage = page
-      this.getData()
+      await this.getData()
     },
     editItem(item) {
       this.modalId = `${this.model}-edit-modal`

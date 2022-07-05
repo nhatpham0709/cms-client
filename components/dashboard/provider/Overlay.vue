@@ -1,6 +1,5 @@
 <template>
-  <!-- The overlay will only be visible on small screens to emphasize the focus on the side navigation when it is open.-->
-  <!--  it also allows to close side navigation when you click outside-->
+
   <div
     :class="
       state.open &&

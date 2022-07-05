@@ -1,12 +1,12 @@
 <template>
-  <li>
+  <li class="hover:bg-gray-700">
     <NuxtLink :to="to">
       <div
         class="flex items-center justify-start my-1 p-3 w-full hover:text-white"
       >
         <div
           :class="$route.path === to && 'bg-gray-700 rounded-full'"
-          class="p-2"
+          class="px-4 py-3"
         >
           <i :class="icon"></i>
         </div>

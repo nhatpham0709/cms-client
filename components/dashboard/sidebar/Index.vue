@@ -7,15 +7,21 @@
         ? 'absolute duration-500 ease-in transition-all w-8/12 z-40 sm:w-5/12 md:w-64'
         : 'duration-700 ease-out hidden transition-all lg:w-24',
     ]"
+    @mouseenter="toggle"
+    @mouseleave="toggle"
   >
     <div class="pb-32 lg:pb-12">
       <div
         class="bg-gray-900 flex items-center justify-center pt-3 sticky top-0 z-10"
       >
-        <img :src="$auth.user.avatar" width="80" height="80" :alt="$auth.user.full_name" />
+        <img
+          :src="$auth.user.avatar"
+          class="w-10 h-10"
+          :alt="$auth.user.full_name"
+        />
       </div>
-      <h1 class="text-center my-3 pb-6">{{ $auth.user.full_name }}</h1>
-      <ul class="md:pl-3">
+      <h1 class="text-center my-3 pb-6">Nuxt CRM</h1>
+      <ul class="md:px-3">
         <DashboardSidebarLink
           v-for="(link, index) in navLinks"
           :key="`sidebar-link-${index}`"
@@ -57,13 +63,13 @@ const NAV_LINKS = {
   },
 }
 export default {
-  inject: ['state'],
+  inject: ['state', 'toggle'],
   props: {
     mobilePosition: {
       type: String,
       default: '',
     },
-  }, 
+  },
   data() {
     return {
       style: {
