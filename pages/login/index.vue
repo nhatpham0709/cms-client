@@ -17,10 +17,10 @@
         <div>
           <label for="email-address" class="sr-only">Email address</label>
           <input
-            v-model="form.email"
-            type="email"
+            v-model="form.identity"
+            type="text"
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            placeholder="Email address"
+            placeholder="address"
           />
         </div>
         <div>
@@ -87,7 +87,7 @@ export default {
   data() {
     return {
       form: {
-        email: '',
+        identity: '',
         password: '',
         remember: false,
       },
@@ -100,7 +100,7 @@ export default {
     async submit() {
       this.processing = true
       try {
-        await this.$auth.loginWith('laravelSanctum', { data: this.form })
+        await this.$auth.loginWith('laravelJWT', { data: this.form })
       } catch (e) {
         this.error = e.response.data.meta.errors
       } finally {

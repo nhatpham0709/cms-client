@@ -10,10 +10,11 @@
   >
     <div class="pb-32 lg:pb-12">
       <div
-        class="bg-gray-900 flex items-center justify-center mb-6 pb-6 pt-3 sticky top-0 z-10"
+        class="bg-gray-900 flex items-center justify-center pt-3 sticky top-0 z-10"
       >
-        <img src="/images/2.png" width="80" height="80" alt="Enoch Ndika" />
+        <img :src="$auth.user.avatar" width="80" height="80" :alt="$auth.user.full_name" />
       </div>
+      <h1 class="text-center my-3 pb-6">{{ $auth.user.full_name }}</h1>
       <ul class="md:pl-3">
         <DashboardSidebarLink
           v-for="(link, index) in navLinks"
@@ -62,7 +63,7 @@ export default {
       type: String,
       default: '',
     },
-  },
+  }, 
   data() {
     return {
       style: {

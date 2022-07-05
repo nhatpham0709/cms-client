@@ -105,27 +105,12 @@
               />
             </svg>
           </a>
-          <a href="#" class="block pr-5 relative" @click="$auth.logout()">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-              />
-            </svg>
-          </a>
-          <a href="#" class="block relative">
+          <a href="#" class="block pr-5 relative" @click="logout"> Log out </a>
+          <a class="block relative">
             <img
-              alt="Maurice Lokumba"
-              src="/images/1.jpg"
-              class="h-10 mx-auto object-cover rounded-full w-10"
+              :alt="$auth.user.full_name"
+              :src="$auth.user.avatar"
+              class="h-10 mx-auto cursor-pointer object-cover rounded-full w-10"
             />
           </a>
         </div>
@@ -136,7 +121,12 @@
 
 <script>
 export default {
-  name: 'TopNavigation',
   inject: ['toggle'],
+  methods: {
+    async logout() {
+      await this.$auth.logout()
+      this.$router.push(this.localePath('/login'))
+    },
+  },
 }
 </script>

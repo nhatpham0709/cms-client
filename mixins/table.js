@@ -1,8 +1,7 @@
 export default {
   data() {
     return {
-      items: [],
-      keyword: '',
+      records: [],
       meta: {
         total: 0,
         from: 0,
@@ -11,10 +10,11 @@ export default {
         currentPage: 1,
       },
       metaRequest: {
-        perPage: 10,
-        order: '',
-        orderBy: 'name',
-        orderType: 'desc',
+        per_page: 10,
+        relationships: ['roles'],
+        order_column: 'created_at',
+        order_by: 'desc',
+        search_columns: ['first_name', 'last_name'],
         keyword: '',
       },
       submiting: false,
@@ -23,34 +23,29 @@ export default {
       modalTextConfirm: '',
       modalTextCancel: 'Cancel',
       modalDeleteId: '',
-      errorMsg: {
-        name: '',
-        description: '',
-      },
       textDelete: '',
     }
   },
+  async fetch() {
+    try {
+      const res = await this.$api.getData(
+        this.model,
+        this.meta.currentPage,
+        this.metaRequest
+      )
+      this.records = res.data.data
+      const pagination = res.data.meta.pagination
+      this.meta.from = pagination.from
+      this.meta.to = pagination.to
+      this.meta.total = pagination.total
+      this.meta.totalPages = pagination.total_pages
+      this.meta.currentPage = pagination.current_page
+    } catch (e) { }
+  },
   mounted() {
     this.modalDeleteId = `${this.model}-delete-modal`
-    this.getData()
   },
   methods: {
-    async getData() {
-      try {
-        const res = await this.$api.get(
-          this.model,
-          this.meta.currentPage,
-          this.metaRequest
-        )
-        this.items = res.data.data
-        const pagination = res.data.meta.pagination
-        this.meta.from = pagination.from
-        this.meta.to = pagination.to
-        this.meta.total = pagination.total
-        this.meta.totalPages = pagination.total_pages
-        this.meta.currentPage = pagination.current_page
-      } catch (e) {}
-    },
     changePage(page) {
       this.meta.currentPage = page
       this.getData()

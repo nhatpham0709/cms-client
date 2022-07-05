@@ -59,31 +59,25 @@ export default {
     credentials: true,
   },
   auth: {
-    resetOnError: true,
-    cookie: {
-      prefix: 'cms_auth',
-      options: {
-        path: '/',
-        maxAge: 60 * 60 * 24 * 7,
-      },
-    },
-    redirect: {
-      login: '/login',
-      logout: '/',
-      callback: '/login',
-      home: '/',
-    },
     strategies: {
-      laravelSanctum: {
-        url: `${process.env.API_URL}/auth`,
+      'laravelJWT': {
+        provider: 'laravel/jwt',
+        url: process.env.API_URL,
         endpoints: {
-          user: {
-            url: '/profile',
-            method: 'get',
-          },
+          login: { url: '/auth/login' },
+          user: { url: '/auth/user' },
+          logout: { url: '/auth/logout' },
+          refresh: { url: '/auth/refresh' }
+        },
+        token: {
+          property: 'access_token',
+          maxAge: 60 * 60
+        },
+        refreshToken: {
+          maxAge: 20160 * 60
         },
       },
-    },
+    }
   },
   moment: {
     locales: ['vi'],

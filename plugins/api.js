@@ -13,8 +13,14 @@ export default function (
   axios.defaults.baseURL = process.env.apiUrl
   const lang = app.$cookiz.get('lang')
 
+  const token = app.$cookiz.get('auth._token.laravelJWT')
+
+  if (token) {
+    axios.defaults.headers.common.Authorization =   token
+  }
+
   if (lang) {
-    $axios.setHeader('Accept-Language', lang)
+    axios.setHeader('Accept-Language', lang)
   }
 
   axios.onError((err) => {
@@ -33,7 +39,7 @@ export default function (
 
   const api = {
     register: (payload) => axios.$post(`auth/register`, payload),
-    testApi: () => axios.$get('auth/profile'),
+    getData: (model, currentPage, metaRequest) => axios.$post(`${model}?page=${currentPage}`, metaRequest),
   }
   inject('api', api)
 }
