@@ -1,24 +1,38 @@
 <template>
-  <DashboardProvider>
-    <div class="bg-gray-900 h-screen overflow-hidden relative">
-      <div class="flex items-start">
-        <DashboardProviderOverlay />
-        <DashboardSidebar mobile-position="right" />
-        <div class="flex flex-col h-screen pl-0 w-full lg:pl-20 lg:space-y-4">
-          <DashboardHeader />
-          <main
-            class="h-screen overflow-auto pb-36 pt-4 px-2 md:pb-8 md:pt-4 lg:pt-0 lg:px-4"
-          >
-            <Nuxt />
-          </main>
-        </div>
+  <div :class="dark ? 'dark' : 'light'">
+    <div
+      class="bg-white dark:bg-gray-900 h-screen overflow-hidden grid grid-cols-12 relative"
+    >
+      <DashboardSidebar
+        :class="isSideBarOpen ? 'col-span-2' : 'col-span-1'"
+        mobile-position="right"
+      />
+
+      <div
+        class="flex flex-col h-screen pl-0 lg:space-y-4"
+        :class="isSideBarOpen ? 'col-span-10' : 'col-span-11'"
+      >
+        <DashboardHeader />
+        <main
+          class="h-screen overflow-auto pb-36 pt-4 px-2 md:pb-8 md:pt-4 lg:pt-0 lg:px-4"
+        >
+          <Nuxt />
+        </main>
       </div>
     </div>
-  </DashboardProvider>
+  </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   middleware: 'auth',
+  computed: {
+    isSideBarOpen() {
+      return this.$store.getters.sideBarOpen
+    },
+    ...mapGetters(['dark']),
+  },
 }
 </script>

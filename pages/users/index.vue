@@ -20,11 +20,11 @@
       <div class="flex flex-col mt-5">
         <div class="overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
           <div
-            class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg"
+            class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 sm:rounded-lg"
           >
             <table class="min-w-full">
               <thead>
-                <tr>
+                <tr class="border-t-2">
                   <th class="table-header">ID</th>
                   <th class="table-header">Avatar</th>
                   <th class="table-header">Name</th>
@@ -96,6 +96,7 @@
               :total="meta.total"
               :total-pages="meta.totalPages"
               :current-page="meta.currentPage"
+              :max-pages="5"
               @changePage="changePage"
             />
           </div>

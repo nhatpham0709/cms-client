@@ -1,37 +1,41 @@
 <template>
-  <aside
-    class="scrollbar h-screen overflow-y-auto text-white top-0 lg:absolute bg-gray-900 lg:block lg:z-40"
-    :class="[
-      style[mobilePosition],
-      state.open
-        ? 'absolute duration-500 ease-in transition-all w-8/12 z-40 sm:w-5/12 md:w-64'
-        : 'duration-700 ease-out hidden transition-all lg:w-24',
-    ]"
-    @mouseenter="toggle"
-    @mouseleave="toggle"
-  >
-    <div class="pb-32 lg:pb-12">
-      <div
-        class="bg-gray-900 flex items-center justify-center pt-3 sticky top-0 z-10"
-      >
-        <img
-          :src="$auth.user.avatar"
-          class="w-10 h-10"
-          :alt="$auth.user.full_name"
-        />
-      </div>
-      <h1 class="text-center my-3 pb-6">Nuxt CRM</h1>
-      <ul class="md:px-3">
-        <DashboardSidebarLink
-          v-for="(link, index) in navLinks"
-          :key="`sidebar-link-${index}`"
-          :to="link.to"
-          :icon="link.icon"
-          :title="link.title"
-        />
-      </ul>
+  <div class="text-black dark:text-white border-r-2 border-gray-700 relative">
+    <div
+      class="dark:bg-gray-900 flex items-center px-5 p-3 sticky top-2 z-10"
+      :class="isSideBarOpen ? 'justify-start' : 'justify-center'"
+    >
+      <img
+        :src="$auth.user.avatar"
+        class="w-10 h-10"
+        :alt="$auth.user.full_name"
+      />
+      <h1 v-if="isSideBarOpen" class="ml-3">Nuxt CRM</h1>
     </div>
-  </aside>
+
+    <ul class="mt-5">
+      <DashboardSidebarLink
+        v-for="(link, index) in navLinks"
+        :key="`sidebar-link-${index}`"
+        :to="link.to"
+        :icon="link.icon"
+        :title="link.title"
+      />
+    </ul>
+    <div
+      class="text-4xl cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 absolute py-4 px-8 w-full bottom-0"
+      @click="toggleSideBar"
+    >
+      <div
+        class="flex items-center"
+        :class="isSideBarOpen ? 'justify-start' : 'justify-center'"
+      >
+        <span class=""> &#8801; </span>
+        <span v-if="isSideBarOpen" class="text-sm ml-4">
+          Collapse sidebar
+        </span>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -63,13 +67,13 @@ const NAV_LINKS = {
   },
 }
 export default {
-  inject: ['state', 'toggle'],
   props: {
     mobilePosition: {
       type: String,
       default: '',
     },
   },
+
   data() {
     return {
       style: {
@@ -78,6 +82,21 @@ export default {
       },
       navLinks: NAV_LINKS,
     }
+  },
+  computed: {
+    isSideBarOpen() {
+      return this.$store.getters.sideBarOpen
+    },
+  },
+  methods: {
+    hoverSideBar() {
+      if (!this.isSideBarOpen) {
+        this.toggleSideBar()
+      }
+    },
+    toggleSideBar() {
+      this.$store.dispatch('toggleSideBar')
+    },
   },
 }
 </script>

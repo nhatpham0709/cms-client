@@ -6,17 +6,6 @@
       <div
         class="flex items-center pl-1 relative w-full sm:ml-0 sm:pr-2 lg:max-w-68"
       >
-        <div class="flex group h-full items-center relative w-12">
-          <button
-            type="button"
-            aria-expanded="false"
-            aria-label="Toggle sidenav"
-            class="text-4xl text-white focus:outline-none"
-            @click="toggle"
-          >
-            &#8801;
-          </button>
-        </div>
         <div class="container flex left-0 relative w-3/4">
           <div
             class="group hidden items-center ml-8 relative w-full md:flex lg:w-72"
@@ -39,7 +28,7 @@
               </svg>
             </div>
             <svg
-              class="absolute fill-current h-4 hidden left-0 ml-4 pointer-events-none text-gray-500 w-4 group-hover:text-gray-400 sm:block"
+              class="absolute fill-current h-4 hidden left-0 ml-4 pointer-events-none w-4 sm:block text-black dark:text-white"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
             >
@@ -49,29 +38,17 @@
             </svg>
             <input
               type="text"
-              class="bg-gray-800 block leading-normal pl-10 py-1.5 pr-4 ring-opacity-90 rounded-2xl text-gray-400 w-full focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="bg-gray-100 dark:bg-gray-700 block leading-normal pl-10 py-1.5 pr-4 rounded-2xl text-gray-400 dark:text-white w-full"
               placeholder="Search"
             />
           </div>
         </div>
         <div
-          class="flex items-center justify-end ml-5 p-1 relative w-full sm:mr-0 sm:right-auto"
+          class="flex items-center text-black dark:text-white justify-end ml-5 p-1 relative w-full sm:mr-0 sm:right-auto"
         >
-          <a href="#" class="block pr-5">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-              />
-            </svg>
+          <a class="block cursor-pointer pr-5" @click="toggleDarkMode">
+            <i v-if="dark" class="fa-solid fa-cloud-sun"></i>
+            <i v-else class="fa-solid fa-moon"></i>
           </a>
           <a href="#" class="block pr-5">
             <svg
@@ -120,12 +97,40 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
-  inject: ['toggle'],
+  computed: {
+    ...mapGetters(['dark']),
+  },
+  mounted() {
+    if (localStorage.theme === undefined) {
+      if (
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+      ) {
+        localStorage.theme = 'dark'
+        this.setDarkMode(true)
+      } else {
+        localStorage.theme = 'light'
+      }
+    } else {
+      this.setDarkMode(localStorage.theme === 'dark')
+    }
+  },
   methods: {
+    ...mapActions(['setDarkMode']),
+
     async logout() {
       await this.$auth.logout()
       this.$router.push(this.localePath('/login'))
+    },
+    toggleSideBar() {
+      this.$store.dispatch('toggleSideBar')
+    },
+    toggleDarkMode() {
+      this.setDarkMode(!this.dark)
+      localStorage.theme = this.dark ? 'dark' : 'light'
     },
   },
 }

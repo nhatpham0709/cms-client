@@ -16,7 +16,7 @@ export default function (
   const token = app.$cookiz.get('auth._token.laravelJWT')
 
   if (token) {
-    axios.defaults.headers.common.Authorization =   token
+    axios.defaults.headers.common.Authorization = token
   }
 
   if (lang) {

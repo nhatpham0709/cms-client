@@ -70,6 +70,14 @@ export default {
       required: false,
       default: 1,
     },
+    maxPages: {
+      type: Number,
+      required: false,
+      default: 5,
+    }
+  },
+  computed: {
+    
   },
   methods: {
     changePage(page) {
