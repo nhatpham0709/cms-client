@@ -1,19 +1,34 @@
 <template>
-  <div class="bg-gray-900 h-screen overflow-hidden relative">
-    <div class="flex items-start">
-      <div class="flex flex-col h-screen pl-0 w-full lg:pl-20 lg:space-y-4">
-        <main
-          class="h-screen overflow-auto pb-36 pt-4 px-2 md:pb-8 md:pt-4 lg:pt-0 lg:px-4"
-        >
-          <Nuxt />
-        </main>
-      </div>
-    </div>
+  <div :class="dark ? 'dark' : 'light'">
+    <Nuxt />
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   middleware: 'guest',
+  computed: {
+    ...mapGetters(['dark']),
+  },
+  mounted() {
+    if (localStorage.theme === undefined) {
+      if (
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+      ) {
+        localStorage.theme = 'dark'
+        this.setDarkMode(true)
+      } else {
+        localStorage.theme = 'light'
+      }
+    } else {
+      this.setDarkMode(localStorage.theme === 'dark')
+    }
+  },
+  methods: {
+    ...mapActions(['setDarkMode']),
+  },
 }
 </script>

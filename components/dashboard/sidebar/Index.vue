@@ -42,27 +42,27 @@
 const NAV_LINKS = {
   home: {
     title: 'Home',
-    icon: 'fa-solid fa-gauge-high',
+    icon: 'fa-solid fa-gauge-high fa-fw',
     to: '/',
   },
   roles: {
     title: 'Roles',
-    icon: 'fa-solid fa-hand-sparkles',
+    icon: 'fa-solid fa-hand-sparkles fa-fw',
     to: '/roles',
   },
   permissions: {
     title: 'Permissions',
-    icon: 'fa-solid fa-triangle-exclamation',
+    icon: 'fa-solid fa-triangle-exclamation fa-fw',
     to: '/permissions',
   },
   users: {
     title: 'Users',
-    icon: 'fa-solid fa-users-gear',
+    icon: 'fa-solid fa-users-gear fa-fw',
     to: '/users',
   },
   profile: {
     title: 'Profile',
-    icon: 'fa-solid fa-id-badge',
+    icon: 'fa-solid fa-id-badge fa-fw',
     to: '/profile',
   },
 }

@@ -24,6 +24,14 @@ export default {
   mounted() {
     this.modalDeleteId = `${this.model}-delete-modal`
   },
+  watch: {
+    metaRequest: {
+      handler() {
+        this.$fetch();
+      },
+      deep: true,
+    }
+  },
   methods: {
     async getData() {
       try {
@@ -43,7 +51,7 @@ export default {
     },
     async changePage(page) {
       this.meta.currentPage = page
-      await this.getData()
+      await this.$fetch()
     },
     editItem(item) {
       this.modalId = `${this.model}-edit-modal`

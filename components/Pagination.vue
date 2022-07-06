@@ -74,13 +74,13 @@ export default {
       type: Number,
       required: false,
       default: 5,
-    }
-  },
-  computed: {
-    
+    },
   },
   methods: {
     changePage(page) {
+      if (page === this.currentPage) {
+        return;
+      }
       this.$emit('changePage', page)
     },
   },
