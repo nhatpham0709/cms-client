@@ -39,7 +39,8 @@ export default function (
 
   const api = {
     register: (payload) => axios.$post(`auth/register`, payload),
-    getData: (model, currentPage, metaRequest) => axios.$post(`${model}?page=${currentPage}`, metaRequest),
+    getData: (model, currentPage, metaRequest) =>
+      axios.$post(`${model}?page=${currentPage}`, metaRequest),
   }
   inject('api', api)
 }

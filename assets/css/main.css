@@ -4,11 +4,10 @@
 
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.2s ease;
+  transition: opacity 0.2s;
 }
-.page-enter-from,
+.page-enter,
 .page-leave-to {
-  transform: scale(0.9);
   opacity: 0;
 }
 input:-webkit-autofill,

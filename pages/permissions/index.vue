@@ -48,14 +48,7 @@
 <script>
 import DataTable from '~/mixins/data'
 
-const TABLE_HEADERS = [
-  'ID',
-  'Name',
-  'Guard',
-  'Roles',
-  'Created at',
-  'Action',
-]
+const TABLE_HEADERS = ['ID', 'Name', 'Guard', 'Roles', 'Created at', 'Action']
 
 export default {
   mixins: [DataTable],

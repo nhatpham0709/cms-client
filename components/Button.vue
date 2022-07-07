@@ -1,5 +1,5 @@
 <template>
-  <button :class="`btn-${type}`" :disabled="loading">
+  <button :class="`btn-${type}`" :disabled="loading" @click="click">
     <template v-if="!loading">
       {{ content }}
     </template>
@@ -25,6 +25,11 @@ export default {
       type: String,
       required: false,
       default: 'primary',
+    },
+  },
+  methods: {
+    click() {
+      this.$emit('click')
     },
   },
 }

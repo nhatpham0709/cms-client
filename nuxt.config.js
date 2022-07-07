@@ -60,24 +60,24 @@ export default {
   },
   auth: {
     strategies: {
-      'laravelJWT': {
+      laravelJWT: {
         provider: 'laravel/jwt',
         url: process.env.API_URL,
         endpoints: {
           login: { url: '/auth/login' },
           user: { url: '/auth/user' },
           logout: { url: '/auth/logout' },
-          refresh: { url: '/auth/refresh' }
+          refresh: { url: '/auth/refresh' },
         },
         token: {
           property: 'access_token',
-          maxAge: 60 * 60
+          maxAge: 60 * 60,
         },
         refreshToken: {
-          maxAge: 20160 * 60
+          maxAge: 20160 * 60,
         },
       },
-    }
+    },
   },
   moment: {
     locales: ['vi'],

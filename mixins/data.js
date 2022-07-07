@@ -19,7 +19,7 @@ export default {
     }
   },
   async fetch() {
-    await this.getData();
+    await this.getData()
   },
   mounted() {
     this.modalDeleteId = `${this.model}-delete-modal`
@@ -27,10 +27,10 @@ export default {
   watch: {
     metaRequest: {
       handler() {
-        this.$fetch();
+        this.$fetch()
       },
       deep: true,
-    }
+    },
   },
   methods: {
     async getData() {
@@ -47,7 +47,7 @@ export default {
         this.meta.total = pagination.total
         this.meta.totalPages = pagination.total_pages
         this.meta.currentPage = pagination.current_page
-      } catch (e) { }
+      } catch (e) {}
     },
     async changePage(page) {
       this.meta.currentPage = page

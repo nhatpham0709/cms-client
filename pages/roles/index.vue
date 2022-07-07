@@ -22,7 +22,10 @@
         </td>
         <td class="table-cell">
           <ul>
-            <li v-for="permission in record.permissions" :key="`permission-${permission.id}`">
+            <li
+              v-for="permission in record.permissions"
+              :key="`permission-${permission.id}`"
+            >
               {{ permission.name }}
             </li>
           </ul>

@@ -79,7 +79,7 @@ export default {
   methods: {
     changePage(page) {
       if (page === this.currentPage) {
-        return;
+        return
       }
       this.$emit('changePage', page)
     },

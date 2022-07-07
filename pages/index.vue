@@ -149,7 +149,7 @@
             />
             <div class="pl-4 w-full">
               <div class="flex items-center justify-between w-full">
-                <div class=" font-medium">Stephanie</div>
+                <div class="font-medium">Stephanie</div>
                 <div
                   class="flex justify-center items-center cursor-pointer h-7 w-7"
                 >

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap">
+  <div class="flex flex-wrap" @keyup.esc="closeModal">
     <div
       class="w-full bg-gray-50 dark:bg-gray-800 py-6 px-6 lg:mx-20 rounded-3xl"
     >
@@ -18,7 +18,7 @@
           <option>10</option>
           <option>20</option>
         </select>
-        <Button type="green" :content="createTitle" />
+        <Button type="green" :content="createTitle" @click="toggleModal" />
       </div>
       <div class="flex flex-col mt-5">
         <div class="overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -74,7 +74,15 @@
           </div>
         </div>
       </div>
-      <slot name="content"> </slot>
+      <Modal ref="createModal" :title="createTitle">
+        <template #content>
+          <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+            With less than a month to go before the European Union enacts new
+            consumer privacy laws for its citizens, companies around the world
+            are updating their terms of service agreements to comply.
+          </p>
+        </template>
+      </Modal>
     </div>
   </div>
 </template>
@@ -106,7 +114,7 @@ export default {
       type: Boolean,
       default: false,
       required: false,
-    }
+    },
   },
   methods: {
     changePerPage(event) {
@@ -114,6 +122,12 @@ export default {
     },
     changePage(page) {
       this.$emit('changePage', page)
+    },
+    toggleModal() {
+      this.$refs.createModal.toggleModal()
+    },
+    closeModal() {
+      this.$refs.createModal.closeModal()
     },
   },
 }
