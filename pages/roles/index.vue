@@ -2,7 +2,7 @@
   <PageLayout
     title="Manage Roles"
     :table-headers="tableHeaders"
-    :loading="$fetchState.pending"
+    :loading="false"
     :per-page.sync="metaRequest.per_page"
     :meta="meta"
     create-title="Create role"
@@ -64,15 +64,8 @@ export default {
   mixins: [DataTable],
   data() {
     return {
-      model: 'roles',
-      metaRequest: {
-        per_page: 5,
-        relationships: ['permissions'],
-        order_column: 'created_at',
-        order_by: 'desc',
-        search_columns: [],
-        keyword: '',
-      },
+      // model: 'roles',
+
       tableHeaders: TABLE_HEADERS,
     }
   },

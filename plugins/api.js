@@ -1,7 +1,4 @@
-export default function (
-  { $auth, $axios, app, redirect, error },
-  inject
-) {
+export default function ({ $auth, $axios, $t, app, redirect, error }, inject) {
   const axios = $axios.create({
     headers: {
       common: {
@@ -10,24 +7,40 @@ export default function (
       },
     },
   })
+  const setToken = () => {
+    const token = app.$cookiz.get('auth._token.laravelJWT')
+    if (token) {
+      axios.defaults.headers.common.Authorization = token
+    }
+  }
+  const setLang = () => {
+    const lang = app.$cookiz.get('lang')
+    if (lang) {
+      axios.setHeader('Accept-Language', lang)
+    }
+  }
+
   axios.defaults.baseURL = process.env.apiUrl
-  const lang = app.$cookiz.get('lang')
+  setToken()
+  setLang()
 
-  const token = app.$cookiz.get('auth._token.laravelJWT')
-
-  if (token) {
-    axios.defaults.headers.common.Authorization = token
-  }
-
-  if (lang) {
-    axios.setHeader('Accept-Language', lang)
-  }
+  $axios.onRequest(() => {
+    setToken()
+    setLang()
+  })
 
   axios.onError((err) => {
     const code = parseInt(err.response && err.response.status)
-    if ([401].includes(code)) {
-      $auth.logout();
+    if (code === 401) {
+      $auth.logout()
       redirect('/login')
+      return
+    }
+    if (code === 403) {
+      error({
+        statusCode: 403,
+        message: app.i18n.t('error.message.403'),
+      })
     }
     if ([500, 503].includes(code)) {
       error({
@@ -42,5 +55,6 @@ export default function (
     getData: (model, currentPage, metaRequest) =>
       axios.$post(`${model}?page=${currentPage}`, metaRequest),
   }
+
   inject('api', api)
 }

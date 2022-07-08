@@ -2,7 +2,7 @@
   <PageLayout
     title="Manage users"
     :table-headers="tableHeaders"
-    :loading="$fetchState.pending"
+    :loading="false"
     :per-page.sync="metaRequest.per_page"
     :meta="meta"
     create-title="Create user"
@@ -76,15 +76,15 @@ export default {
   mixins: [DataTable],
   data() {
     return {
-      model: 'users',
-      metaRequest: {
-        per_page: 5,
-        relationships: ['roles'],
-        order_column: 'created_at',
-        order_by: 'desc',
-        search_columns: ['first_name', 'last_name'],
-        keyword: '',
-      },
+      // model: 'users',
+      // metaRequest: {
+      //   per_page: 5,
+      //   relationships: ['roles'],
+      //   order_column: 'created_at',
+      //   order_by: 'desc',
+      //   search_columns: ['first_name', 'last_name'],
+      //   keyword: '',
+      // },
       tableHeaders: TABLE_HEADERS,
     }
   },

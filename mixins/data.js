@@ -1,25 +1,18 @@
+import { mapState } from 'vuex'
 export default {
   data() {
-    return {
-      records: [],
-      meta: {
-        total: 0,
-        from: 0,
-        to: 0,
-        totalPages: 1,
-        currentPage: 1,
-      },
-      submiting: false,
-      modalId: '',
-      modalTitle: '',
-      modalTextConfirm: '',
-      modalTextCancel: 'Cancel',
-      modalDeleteId: '',
-      textDelete: '',
-    }
+    return {}
   },
-  async fetch() {
-    await this.getData()
+  computed: {
+    ...mapState({
+      meta: (state) => state.data.meta,
+      model: (state) => state.data.model,
+      records: (state) => state.data.records,
+      metaRequest: (state) => state.data.metaRequest,
+    }),
+  },
+  async asyncData({ store }) {
+    await store.dispatch('data/getData')
   },
   mounted() {
     this.modalDeleteId = `${this.model}-delete-modal`
@@ -33,25 +26,9 @@ export default {
     },
   },
   methods: {
-    async getData() {
-      try {
-        const res = await this.$api.getData(
-          this.model,
-          this.meta.currentPage,
-          this.metaRequest
-        )
-        this.records = res.data
-        const pagination = res.meta.pagination
-        this.meta.from = pagination.from
-        this.meta.to = pagination.to
-        this.meta.total = pagination.total
-        this.meta.totalPages = pagination.total_pages
-        this.meta.currentPage = pagination.current_page
-      } catch (e) {}
-    },
     async changePage(page) {
-      this.meta.currentPage = page
-      await this.$fetch()
+      this.$store.commit('data/SET_CURRENT_PAGE', page)
+      await this.$store.dispatch('data/getData')
     },
     editItem(item) {
       this.modalId = `${this.model}-edit-modal`

@@ -66,8 +66,8 @@
               :to="meta.to"
               :from="meta.from"
               :total="meta.total"
-              :total-pages="meta.totalPages"
-              :current-page="meta.currentPage"
+              :total-pages="meta.total_pages"
+              :current-page="meta.current_page"
               :max-pages="5"
               @changePage="changePage"
             />

@@ -26,17 +26,19 @@
       "title": "Home",
       "description": ""
     },
-    "sever-error": {
-      "title": "500 Internal Server Error",
-      "description": ""
-    },
-    "forbidden": {
-      "title": "Forbidden",
-      "description": ""
-    },
-    "unauthorized": {
-      "title": "Login before continuing",
-      "description": ""
+    "error": {
+      "500": {
+        "title": "Internal Server Error",
+        "description": ""
+      },
+      "403": {
+        "title": "Forbidden",
+        "description": ""
+      },
+      "404": {
+        "title": "404 Not Found",
+        "description": ""
+      }
     },
     "profile": {
       "title": "Profile",
@@ -61,18 +63,17 @@
     "help": {
       "title": "Help",
       "description": ""
-    },
-    "404": {
-      "title": "404 Not Found",
-      "description": ""
     }
   },
   "error": {
-    "404": "The page you're looking for doesn't exist!",
-    "500": "Sorry, something went wrong on our end. We are currently trying to fix the problem!",
-    "403": "You don't have access to this resource!",
-    "goBack": "Go back",
-    "toHome": "To home page"
+    "message": {
+      "404": "The page you're looking for doesn't exist!",
+      "500": "Sorry, something went wrong on our end. We are currently trying to fix the problem!",
+      "403": "You don't have access to this resource!"
+    },
+    "back": "Go back",
+    "suggestion": "But don't worry, you can find plenty of other things on our website.",
+    "home": "Back to home page"
   },
   "home": "Home",
   "login": {

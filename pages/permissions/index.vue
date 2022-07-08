@@ -2,7 +2,7 @@
   <PageLayout
     title="Manage Permissions"
     :table-headers="tableHeaders"
-    :loading="$fetchState.pending"
+    :loading="false"
     :per-page.sync="metaRequest.per_page"
     :meta="meta"
     create-title="Create permission"
@@ -54,7 +54,6 @@ export default {
   mixins: [DataTable],
   data() {
     return {
-      model: 'permissions',
       metaRequest: {
         per_page: 5,
         relationships: ['roles'],

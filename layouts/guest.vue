@@ -8,7 +8,7 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  middleware: 'guest',
+  auth: 'guest',
   computed: {
     ...mapGetters(['dark']),
   },
