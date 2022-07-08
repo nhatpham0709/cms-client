@@ -1,5 +1,5 @@
 export default function (
-  { $auth, $axios, app, store, redirect, error, $config },
+  { $auth, $axios, app, redirect, error },
   inject
 ) {
   const axios = $axios.create({
@@ -26,13 +26,13 @@ export default function (
   axios.onError((err) => {
     const code = parseInt(err.response && err.response.status)
     if ([401].includes(code)) {
-      $auth.logout().then(() => redirect('/login'))
-      return
+      $auth.logout();
+      redirect('/login')
     }
     if ([500, 503].includes(code)) {
       error({
         statusCode: code,
-        message: err.response.data.meta.message,
+        message: error.response.data.meta.message,
       })
     }
   })

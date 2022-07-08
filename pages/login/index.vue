@@ -94,9 +94,13 @@ export default {
     async login() {
       this.loading = true
       try {
-        await this.$auth.loginWith('laravelJWT', { data: this.form })
+        await this.$auth.loginWith('laravelJWT', {
+          data: this.form,
+        })
       } catch (e) {
-        this.error = e.response.data.meta.errors
+        if (e.response.data.meta.errors) {
+          this.error = e.response.data.meta.errors
+        }
       } finally {
         this.loading = false
       }
