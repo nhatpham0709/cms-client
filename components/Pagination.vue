@@ -81,7 +81,7 @@ export default {
       if (page === this.currentPage) {
         return
       }
-      this.$emit('changePage', page)
+      this.$store.dispatch('data/changePage', page)
     },
   },
 }

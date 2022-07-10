@@ -45,15 +45,16 @@ export default function ({ $auth, $axios, $t, app, redirect, error }, inject) {
     if ([500, 503].includes(code)) {
       error({
         statusCode: code,
-        message: error.response.data.meta.message,
+        message: error.response.data.pagination.message,
       })
     }
   })
 
   const api = {
     register: (payload) => axios.$post(`auth/register`, payload),
-    getData: (model, currentPage, metaRequest) =>
-      axios.$post(`${model}?page=${currentPage}`, metaRequest),
+    getAll: (model) => axios.$get(`/${model}/all`),
+    getData: (model, currentPage, request) =>
+      axios.$post(`${model}?page=${currentPage}`, request),
   }
 
   inject('api', api)

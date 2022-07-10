@@ -31,6 +31,7 @@ export default {
     // '@/plugins/loading',
     '@/plugins/vee-validate',
     '@/plugins/api.js',
+    { src: '@/plugins/flowbite', ssr: false },
   ],
 
   components: true,

@@ -63,26 +63,17 @@
             </table>
 
             <Pagination
-              :to="meta.to"
-              :from="meta.from"
-              :total="meta.total"
-              :total-pages="meta.total_pages"
-              :current-page="meta.current_page"
+              :to="pagination.to"
+              :from="pagination.from"
+              :total="pagination.total"
+              :total-pages="pagination.total_pages"
+              :current-page="pagination.current_page"
               :max-pages="5"
-              @changePage="changePage"
             />
           </div>
         </div>
       </div>
-      <Modal ref="createModal" :title="createTitle">
-        <template #content>
-          <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-            With less than a month to go before the European Union enacts new
-            consumer privacy laws for its citizens, companies around the world
-            are updating their terms of service agreements to comply.
-          </p>
-        </template>
-      </Modal>
+      <slot name="modal"> </slot>
     </div>
   </div>
 </template>
@@ -98,15 +89,12 @@ export default {
       type: Number,
       default: 5,
     },
-    createTitle: {
-      type: String,
-      default: 'Create',
-    },
+
     tableHeaders: {
       type: Array,
       default: () => [],
     },
-    meta: {
+    pagination: {
       type: Object,
       default: () => ({}),
     },
@@ -115,19 +103,21 @@ export default {
       default: false,
       required: false,
     },
+    createTitle: {
+      type: String,
+      required: false,
+      default: 'Create',
+    },
   },
   methods: {
-    changePerPage(event) {
-      this.$emit('update:perPage', Number(event.target.value))
-    },
-    changePage(page) {
-      this.$emit('changePage', page)
+    changePerPage(e) {
+      this.$store.dispatch('data/changePerPage', parseInt(e.target.value))
     },
     toggleModal() {
-      this.$refs.createModal.toggleModal()
+      this.$emit('toggleModal')
     },
     closeModal() {
-      this.$refs.createModal.closeModal()
+      this.$emit('closeModal')
     },
   },
 }

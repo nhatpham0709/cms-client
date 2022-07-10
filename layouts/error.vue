@@ -51,7 +51,9 @@ export default {
       return this.error.statusCode || '500'
     },
     title() {
-      return `${this.status} - ${this.$t(`meta.error.${this.status}.title`)}`
+      return `${this.status} - ${this.$t(
+        `pagination.error.${this.status}.title`
+      )}`
     },
   },
 }

@@ -7,7 +7,7 @@ export default {
   middleware: 'guest',
   head() {
     return {
-      title: this.$t('meta.password.forget.title'),
+      title: this.$t('pagination.password.forget.title'),
     }
   },
 }

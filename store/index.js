@@ -1,5 +1,5 @@
 export const state = () => ({
-  sideBarOpen: false,
+  sideBarOpen: true,
   dark: false,
 })
 

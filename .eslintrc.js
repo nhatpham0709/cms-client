@@ -11,5 +11,8 @@ module.exports = {
   },
   extends: ['@nuxtjs', 'plugin:nuxt/recommended', 'prettier'],
   plugins: [],
-  rules: { 'vue/multi-word-component-names': 0 },
+  rules: {
+    'vue/multi-word-component-names': 0,
+    'vue/component-definition-name-casing': 0,
+  },
 }

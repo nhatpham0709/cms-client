@@ -1,22 +1,15 @@
 export const state = () => ({
   model: '',
+  loadingData: false,
   records: [],
-  meta: {
+  pagination: {
     total: 0,
     from: 0,
     to: 0,
     total_pages: 1,
     current_page: 1,
   },
-  metaRequest: {
-    per_page: 5,
-    relationships: ['permissions'],
-    order_column: 'created_at',
-    order_by: 'desc',
-    search_columns: [],
-    keyword: '',
-  },
-  submiting: false,
+  request: null,
   modalId: '',
   modalTitle: '',
   modalTextConfirm: '',
@@ -33,33 +26,57 @@ export const mutations = {
   SET_RECORDS(state, records) {
     state.records = records
   },
-  SET_META(state, meta) {
-    state.meta = meta
+  SET_PAGINATION(state, pagination) {
+    state.pagination = pagination
   },
   SET_CURRENT_PAGE(state, currentPage) {
-    state.meta.current_page = currentPage
+    state.pagination.current_page = currentPage
   },
   SET_MODEL(state, model) {
     state.model = model
   },
+  SET_LOADING_DATA(state, bool) {
+    state.loadingData = bool
+  },
+  SET_PER_PAGE(state, perPage) {
+    state.request.per_page = perPage
+  },
+  SET_META_REQUEST(state, request) {
+    state.request = request
+  },
 }
 
 export const actions = {
-  setData({ commit }, records, meta) {
-    commit('SET_RECORDS', records)
-    commit('SET_META', meta)
+  setRequest({ commit }, { model, request }) {
+    commit('SET_MODEL', model)
+    commit('SET_META_REQUEST', request)
+    commit('SET_CURRENT_PAGE', 1)
   },
-
+  async fetchData({ dispatch }, { model, request }) {
+    dispatch('setRequest', { model, request })
+    await dispatch('getData')
+  },
+  async changePage({ commit, dispatch }, page) {
+    commit('SET_CURRENT_PAGE', page)
+    await dispatch('getData')
+  },
+  async changePerPage({ commit, dispatch }, perPage) {
+    commit('SET_PER_PAGE', perPage)
+    await dispatch('getData')
+  },
   async getData({ commit, state }) {
-    commit('SET_MODEL', this.$router.currentRoute.path.split('/')[1])
+    commit('SET_LOADING_DATA', true)
     try {
       const res = await this.$api.getData(
         state.model,
-        state.meta.current_page,
-        state.metaRequest
+        state.pagination.current_page,
+        state.request
       )
       commit('SET_RECORDS', res.data)
-      commit('SET_META', res.meta.pagination)
-    } catch (e) {}
+      commit('SET_PAGINATION', res.meta.pagination)
+    } catch (e) {
+    } finally {
+      commit('SET_LOADING_DATA', false)
+    }
   },
 }

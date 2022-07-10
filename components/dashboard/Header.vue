@@ -50,37 +50,19 @@
             <i v-if="dark" class="fa-solid fa-cloud-sun"></i>
             <i v-else class="fa-solid fa-moon"></i>
           </a>
-          <a href="#" class="block pr-5">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </a>
+          <client-only>
+            <a class="block cursor-pointer pr-5">
+              <NuxtLink
+                v-for="locale in availableLocales"
+                :key="locale.code"
+                :title="locale.name"
+                :to="switchLocalePath(locale.code)"
+                ><img class="h-10 w-10" :src="`/images/${locale.code}.svg`" />
+              </NuxtLink>
+            </a>
+          </client-only>
           <a href="#" class="block pr-5 relative">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-              />
-            </svg>
+            {{ $auth.user.first_name }}
           </a>
           <a href="#" class="block pr-5 relative" @click="logout"> Log out </a>
           <a class="block relative">
@@ -102,6 +84,9 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters(['dark']),
+    availableLocales() {
+      return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale)
+    },
   },
   methods: {
     ...mapActions(['setDarkMode']),

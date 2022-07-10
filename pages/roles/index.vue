@@ -2,11 +2,12 @@
   <PageLayout
     title="Manage Roles"
     :table-headers="tableHeaders"
-    :loading="false"
-    :per-page.sync="metaRequest.per_page"
-    :meta="meta"
-    create-title="Create role"
-    @changePage="changePage"
+    :loading="loadingData"
+    :per-page="request.per_page"
+    :pagination="pagination"
+    create-title="Create Role"
+    @toggleModal="toggleModal"
+    @closeModal="closeModal"
   >
     <template #table-content>
       <tr v-for="record in records" :key="record.id" class="max-h-10">
@@ -45,6 +46,35 @@
         </td>
       </tr>
     </template>
+    <template #modal>
+      <Modal ref="createModal" title="Create Role" @closeModal="closeModal">
+        <template #content>
+          <form ref="form">
+            <div class="mb-6">
+              <label
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                >Role name</label
+              >
+              <input v-model="form.name" type="text" class="input" />
+            </div>
+            <div class="mb-6">
+              <label
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                >Permissions</label
+              >
+              <select v-model="form.permissions" multiple class="input">
+                <option
+                  v-for="permission in permissions"
+                  :key="`permission-${permission.id}`"
+                >
+                  {{ permission.name }}
+                </option>
+              </select>
+            </div>
+          </form>
+        </template>
+      </Modal>
+    </template>
   </PageLayout>
 </template>
 
@@ -62,11 +92,31 @@ const TABLE_HEADERS = [
 
 export default {
   mixins: [DataTable],
+  async asyncData({ store, app }) {
+    const request = {
+      per_page: 5,
+      relationships: ['permissions'],
+      order_column: 'created_at',
+      order_by: 'desc',
+      search_columns: ['name', 'guard_name'],
+      keyword: '',
+    }
+    const model = 'roles'
+    const res = await app.$api.getAll('permissions')
+
+    await store.dispatch('data/fetchData', { model, request })
+
+    return {
+      permissions: res.data,
+    }
+  },
   data() {
     return {
-      // model: 'roles',
-
       tableHeaders: TABLE_HEADERS,
+      form: {
+        name: '',
+        permissions: [],
+      },
     }
   },
 }

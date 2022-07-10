@@ -14,7 +14,6 @@
       aria-modal="true"
       class="overflow-y-auto overflow-x-hidden fixed z-50 w-full inset-0 h-full"
       role="dialog"
-      @keyup.esc="closeModal"
     >
       <div
         class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
@@ -23,7 +22,7 @@
         class="relative p-4 w-screen h-screen flex items-center justify-center"
       >
         <div
-          class="relative max-w-2xl bg-white rounded-lg shadow dark:bg-gray-700"
+          class="relative max-w-2xl min-w-[50%] bg-white rounded-lg shadow dark:bg-gray-700"
         >
           <div
             class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600"
@@ -34,7 +33,7 @@
             <button
               type="button"
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-              @click="toggleModal"
+              @click="closeModal"
             >
               <svg
                 class="w-5 h-5"
@@ -57,7 +56,7 @@
             class="flex items-center justify-end p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600"
           >
             <Button type="primary" :content="submitContent" @click="submit" />
-            <Button type="dark" :content="cancelContent" @click="toggleModal" />
+            <Button type="dark" :content="cancelContent" @click="closeModal" />
           </div>
         </div>
       </div>

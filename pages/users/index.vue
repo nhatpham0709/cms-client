@@ -2,11 +2,10 @@
   <PageLayout
     title="Manage users"
     :table-headers="tableHeaders"
-    :loading="false"
-    :per-page.sync="metaRequest.per_page"
-    :meta="meta"
+    :loading="loadingData"
+    :per-page="request.per_page"
+    :pagination="pagination"
     create-title="Create user"
-    @changePage="changePage"
   >
     <template #table-content>
       <tr v-for="record in records" :key="record.id" class="max-h-10">
@@ -74,17 +73,20 @@ const TABLE_HEADERS = [
 
 export default {
   mixins: [DataTable],
+  async asyncData({ store }) {
+    const request = {
+      per_page: 5,
+      relationships: ['roles'],
+      order_column: 'created_at',
+      order_by: 'desc',
+      search_columns: ['first_name', 'last_name'],
+      keyword: '',
+    }
+    const model = 'users'
+    await store.dispatch('data/fetchData', { model, request })
+  },
   data() {
     return {
-      // model: 'users',
-      // metaRequest: {
-      //   per_page: 5,
-      //   relationships: ['roles'],
-      //   order_column: 'created_at',
-      //   order_by: 'desc',
-      //   search_columns: ['first_name', 'last_name'],
-      //   keyword: '',
-      // },
       tableHeaders: TABLE_HEADERS,
     }
   },
