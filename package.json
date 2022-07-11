@@ -32,7 +32,7 @@
     "@nuxtjs/i18n": "^7.2.0",
     "@nuxtjs/moment": "^1.6.1",
     "@nuxtjs/toast": "^3.3.1",
-    "cookie-universal-nuxt": "^2.1.5",
+    "cookie-universal-nuxt": "^2.2.1",
     "core-js": "^3.19.3",
     "flowbite": "^1.4.7",
     "nuxt": "^2.15.8",
