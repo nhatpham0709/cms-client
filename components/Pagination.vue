@@ -1,8 +1,8 @@
 <template>
   <div
-    class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between"
+    class="px-5 py-5 bg-white dark:bg-gray-800 border-t flex flex-col xs:flex-row items-center xs:justify-between"
   >
-    <span class="text-xs xs:text-sm text-gray-900">
+    <span class="text-xs xs:text-sm">
       Showing {{ from }} to {{ to }} of {{ total }} entries
     </span>
     <nav>
@@ -11,7 +11,8 @@
           <a
             class="btn-prev cursor-pointer"
             :class="{
-              'pointer-events-none !bg-gray-200': currentPage === 1,
+              'pointer-events-none !bg-gray-200 dark:!bg-gray-700':
+                currentPage === 1,
             }"
             @click="changePage(currentPage - 1)"
             >Previous</a
@@ -31,7 +32,8 @@
           <a
             class="btn-next cursor-pointer"
             :class="{
-              'pointer-events-none !bg-gray-200': currentPage === totalPages,
+              'pointer-events-none !bg-gray-200 dark:!bg-gray-700':
+                currentPage === totalPages,
             }"
             @click="changePage(currentPage + 1)"
             >Next</a

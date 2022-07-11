@@ -45,13 +45,17 @@
             <button class="btn-edit">
               <i class="fa-solid fa-pencil" aria-hidden="true"></i>
             </button>
-            <button class="btn-delete">
+            <button
+              class="btn-delete"
+              @click="toggleDeleteModal(record.full_name, record.id)"
+            >
               <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
             </button>
           </div>
         </td>
       </tr>
     </template>
+    <template #modal></template>
   </PageLayout>
 </template>
 

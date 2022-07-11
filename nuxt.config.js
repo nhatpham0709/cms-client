@@ -4,7 +4,7 @@ export default {
   head: {
     title: 'Nuxt CMS',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'vi',
     },
     meta: [
       { charset: 'utf-8' },
@@ -50,11 +50,23 @@ export default {
 
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/toast',
     ['cookie-universal-nuxt', { alias: 'cookiz' }],
     '@nuxt/image',
     '@nuxtjs/i18n',
     '@nuxtjs/auth-next',
   ],
+  toast: {
+    position: 'top-right',
+    duration: 3000,
+    className: '',
+    action: {
+      text: 'close',
+      onClick: (e, toastObject) => {
+        toastObject.goAway(0)
+      },
+    },
+  },
   axios: {
     baseURL: process.env.API_URL,
     credentials: true,

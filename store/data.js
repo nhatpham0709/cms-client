@@ -10,12 +10,11 @@ export const state = () => ({
     current_page: 1,
   },
   request: null,
-  modalId: '',
+  modalActive: false,
   modalTitle: '',
-  modalTextConfirm: '',
-  modalTextCancel: 'Cancel',
-  modalDeleteId: '',
-  textDelete: '',
+  deleteModalActive: false,
+  deleteModalItemName: '',
+  deleteModalItemId: null,
 })
 
 export const getters = {
@@ -44,9 +43,48 @@ export const mutations = {
   SET_META_REQUEST(state, request) {
     state.request = request
   },
+  SET_DELETE_MODAL_ACTIVE(state, bool) {
+    state.deleteModalActive = bool
+  },
+  SET_DELETE_MODAL_ITEM_NAME(state, name) {
+    state.deleteModalItemName = name
+  },
+  SET_DELETE_MODAL_ITEM_ID(state, id) {
+    state.deleteModalItemId = id
+  },
+  SET_MODAL_ACTIVE(state, bool) {
+    state.modalActive = bool
+  },
+  SET_MODAL_TITLE(state, title) {
+    state.modalTitle = title
+  },
 }
 
 export const actions = {
+  closeModal({ commit }) {
+    commit('SET_MODAL_ACTIVE', false)
+  },
+  closeDeleteModal({ commit }) {
+    commit('SET_DELETE_MODAL_ACTIVE', false)
+  },
+  toggleDeleteModal({ commit }, { name, id }) {
+    commit('SET_DELETE_MODAL_ITEM_NAME', name)
+    commit('SET_DELETE_MODAL_ITEM_ID', id)
+    commit('SET_DELETE_MODAL_ACTIVE', true)
+  },
+  toggleModal({ commit }) {
+    commit('SET_MODAL_ACTIVE', true)
+  },
+  async deleteRecord({ commit, dispatch, state }) {
+    try {
+      await this.$api.deleteById(state.model, state.deleteModalItemId)
+      await dispatch('getData')
+      this.$toast.show(`${state.deleteModalItemName} has been deleted! `)
+    } catch (e) {
+    } finally {
+      commit('SET_DELETE_MODAL_ACTIVE', false)
+    }
+  },
   setRequest({ commit }, { model, request }) {
     commit('SET_MODEL', model)
     commit('SET_META_REQUEST', request)

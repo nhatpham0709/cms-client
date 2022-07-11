@@ -6,8 +6,6 @@
     :per-page="request.per_page"
     :pagination="pagination"
     create-title="Create Role"
-    @toggleModal="toggleModal"
-    @closeModal="closeModal"
   >
     <template #table-content>
       <tr v-for="record in records" :key="record.id" class="max-h-10">
@@ -37,17 +35,25 @@
         <td class="table-cell">
           <div class="flex">
             <button class="btn-edit">
-              <i class="fa-solid fa-pencil" aria-hidden="true"></i>
+              <i class="fa-solid fa-pencil" aria-hidden="true" title="Edit"></i>
             </button>
-            <button class="btn-delete">
-              <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
+            <button
+              class="btn-delete"
+              title="Delete"
+              @click="toggleDeleteModal(record.name, record.id)"
+            >
+              <i
+                class="fa-solid fa-trash-can"
+                aria-hidden="true"
+                title="Delete"
+              ></i>
             </button>
           </div>
         </td>
       </tr>
     </template>
     <template #modal>
-      <Modal ref="createModal" title="Create Role" @closeModal="closeModal">
+      <Modal ref="createModal" :title="modalTitle">
         <template #content>
           <form ref="form">
             <div class="mb-6">

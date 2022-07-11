@@ -1,7 +1,7 @@
 <template>
-  <header class="h-20 items-center relative z-10">
+  <header class="h-20 items-center relative z-10 shadow">
     <div
-      class="flex flex-center flex-col h-full justify-center mx-auto relative px-3 text-white z-10"
+      class="flex flex-center flex-col h-full justify-center mx-auto relative px-3 z-10"
     >
       <div
         class="flex items-center pl-1 relative w-full sm:ml-0 sm:pr-2 lg:max-w-68"

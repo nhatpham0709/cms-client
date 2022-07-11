@@ -52,6 +52,7 @@ export default function ({ $auth, $axios, $t, app, redirect, error }, inject) {
 
   const api = {
     register: (payload) => axios.$post(`auth/register`, payload),
+    deleteById: (model, id) => axios.$delete(`${model}/${id}`),
     getAll: (model) => axios.$get(`/${model}/all`),
     getData: (model, currentPage, request) =>
       axios.$post(`${model}?page=${currentPage}`, request),

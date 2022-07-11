@@ -1,6 +1,7 @@
 <template>
   <div class="text-black dark:text-white border-r-2 border-gray-700 relative">
-    <div
+    <NuxtLink
+      :to="localePath('/')"
       class="dark:bg-gray-900 flex items-center px-5 p-3 sticky top-2 z-10"
       :class="isSideBarOpen ? 'justify-start' : 'justify-center'"
     >
@@ -10,7 +11,7 @@
         :alt="$auth.user.full_name"
       />
       <h1 v-if="isSideBarOpen" class="ml-3">Nuxt CRM</h1>
-    </div>
+    </NuxtLink>
 
     <ul class="mt-5">
       <DashboardSidebarLink

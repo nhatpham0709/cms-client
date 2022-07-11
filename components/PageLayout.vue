@@ -3,22 +3,24 @@
     <div
       class="w-full bg-gray-50 dark:bg-gray-800 py-6 px-6 lg:mx-20 rounded-3xl"
     >
-      <div
-        class="flex justify-between text-black dark:text-white items-center mb-8"
-      >
+      <div class="flex justify-between items-center mb-8">
         <p class="text-2xl font-bold">{{ title }}</p>
       </div>
       <div class="flex justify-between">
         <select
           :value="perPage"
-          class="h-full rounded border block appearance-none bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          class="h-full rounded border block appearance-none bg-white dark:bg-gray-600 py-2 px-4 pr-8 leading-tight"
           @change="changePerPage"
         >
           <option>5</option>
           <option>10</option>
           <option>20</option>
         </select>
-        <Button type="green" :content="createTitle" @click="toggleModal" />
+        <Button
+          type="green"
+          :content="createTitle"
+          @click="toggleModal(createTitle)"
+        />
       </div>
       <div class="flex flex-col mt-5">
         <div class="overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -27,7 +29,7 @@
           >
             <table class="min-w-full">
               <thead>
-                <tr class="border-t-2">
+                <tr class="">
                   <th
                     v-for="(header, index) in tableHeaders"
                     :key="`header-${index}`"
@@ -38,7 +40,7 @@
                 </tr>
               </thead>
 
-              <tbody class="bg-white">
+              <tbody class="bg-white dark:bg-gray-800">
                 <template v-if="loading">
                   <tr
                     v-for="index in perPage"
@@ -51,7 +53,7 @@
                       class="py-2"
                     >
                       <div
-                        class="animate-pulse rounded-full mx-2 my-4 h-6 bg-gray-200"
+                        class="animate-pulse rounded-full mx-2 my-4 h-6 bg-gray-200 dark:bg-gray-600"
                       ></div>
                     </td>
                   </tr>
@@ -73,6 +75,7 @@
           </div>
         </div>
       </div>
+      <DeleteModal />
       <slot name="modal"> </slot>
     </div>
   </div>
@@ -113,11 +116,13 @@ export default {
     changePerPage(e) {
       this.$store.dispatch('data/changePerPage', parseInt(e.target.value))
     },
-    toggleModal() {
-      this.$emit('toggleModal')
+    toggleModal(title) {
+      this.$store.commit('data/SET_MODAL_TITLE', title)
+      this.$store.dispatch('data/toggleModal')
     },
     closeModal() {
-      this.$emit('closeModal')
+      this.$store.dispatch('data/closeModal')
+      this.$store.dispatch('data/closeDeleteModal')
     },
   },
 }

@@ -1,7 +1,10 @@
 <template>
   <li
-    :class="$route.path === to && 'bg-gray-200 dark:bg-gray-700'"
-    class="hover:bg-gray-200 dark:hover:bg-gray-700"
+    :class="
+      $route.path === to &&
+      'bg-gray-50 border-l-4 border-blue-500 dark:bg-gray-600'
+    "
+    class="hover:bg-gray-100 hover:border-l-4 hover:border-blue-500 dark:hover:bg-gray-500"
   >
     <NuxtLink
       :to="to"

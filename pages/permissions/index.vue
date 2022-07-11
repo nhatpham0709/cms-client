@@ -32,10 +32,17 @@
         <td class="table-cell">
           <div class="flex">
             <button class="btn-edit">
-              <i class="fa-solid fa-pencil" aria-hidden="true"></i>
+              <i class="fa-solid fa-pencil" aria-hidden="true" title="Edit"></i>
             </button>
-            <button class="btn-delete">
-              <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
+            <button
+              class="btn-delete"
+              @click="toggleDeleteModal(record.name, record.id)"
+            >
+              <i
+                class="fa-solid fa-trash-can"
+                aria-hidden="true"
+                title="Delete"
+              ></i>
             </button>
           </div>
         </td>

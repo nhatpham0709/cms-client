@@ -8,7 +8,7 @@
     leave-to-class="opacity-0 -translate-y-full"
   >
     <div
-      v-if="isModalActive"
+      v-if="modalActive"
       tabindex="-1"
       aria-hidden="true"
       aria-modal="true"
@@ -28,7 +28,7 @@
             class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600"
           >
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-              {{ title }}
+              {{ modalTitle }}
             </h3>
             <button
               type="button"
@@ -65,12 +65,10 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   props: {
-    title: {
-      type: String,
-      required: true,
-    },
     submitContent: {
       type: String,
       required: false,
@@ -82,20 +80,19 @@ export default {
       default: 'Cancel',
     },
   },
-  data() {
-    return {
-      isModalActive: false,
-    }
+  computed: {
+    ...mapState({
+      modalActive: (state) => state.data.modalActive,
+      modalTitle: (state) => state.data.modalTitle,
+    }),
   },
+
   methods: {
     submit() {
       this.$emit('submit')
     },
-    toggleModal() {
-      this.isModalActive = !this.isModalActive
-    },
     closeModal() {
-      this.isModalActive = false
+      this.$store.dispatch('data/closeModal')
     },
   },
 }

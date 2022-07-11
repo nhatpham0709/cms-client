@@ -8,25 +8,18 @@ export default {
       records: (state) => state.data.records,
       request: (state) => state.data.request,
       loadingData: (state) => state.data.loadingData,
+      deleteModalTitle: (state) => state.data.deleteModalTitle,
+      deleteModalActive: (state) => state.data.deleteModalActive,
+      modalActive: (state) => state.data.modalActive,
+      modalTitle: (state) => state.data.modalTitle,
     }),
   },
   methods: {
-    toggleModal() {
-      this.$refs.createModal.toggleModal()
+    toggleDeleteModal(name, id) {
+      this.$store.dispatch('data/toggleDeleteModal', { name, id })
     },
-    closeModal() {
-      Object.keys(this.form).forEach((key) => {
-        if (typeof this.form[key] instanceof Array) {
-          this.form[key] = []
-          return
-        }
-        if (this.form[key] instanceof Object) {
-          this.form[key] = {}
-          return
-        }
-        this.form[key] = ''
-      })
-      this.$refs.createModal.closeModal()
+    closeDeleteModal() {
+      this.$store.commit('data/SET_DELETE_MODAL_ACTIVE', false)
     },
   },
 }
