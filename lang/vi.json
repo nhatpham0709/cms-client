@@ -1,8 +1,8 @@
 {
-  "pagination": {
+  "meta": {
     "login": {
       "title": "Đăng nhập vào tài khoản của bạn",
-      "description": ""
+      "description": "Đăng nhập vào tài khoản của bạn"
     },
     "signUp": {
       "title": "Đăng ký tài khoản NP Meet",
@@ -22,38 +22,27 @@
         "description": ""
       }
     },
-    "index": {
+    "dashboard": {
       "title": "Trang chủ",
-      "description": ""
+      "description": "Trang chủ"
     },
     "profile": {
-      "title": "Hồ sơ",
-      "description": ""
+      "title": "Hồ sơ của bạn",
+      "description": "Quản lí hồ sơ của bạn"
     },
-    "groups": {
-      "title": "Nhóm",
-      "description": ""
+    "roles": {
+      "title": "Quản lí vai trò",
+      "description": "Quản lí vai trò"
     },
-    "friends": {
-      "title": "Bạn bè",
-      "description": ""
+    "permissions": {
+      "title": "Quản lí quyền",
+      "description": "Quản lí quyền"
     },
-    "chat": {
-      "title": "Trò chuyện",
-      "description": ""
+    "users": {
+      "title": "Quản lí người dùng",
+      "description": "Quản lí người dùng"
     },
-    "exercises": {
-      "title": "Bài tập",
-      "description": ""
-    },
-    "calls": {
-      "title": "Cuộc gọi",
-      "description": ""
-    },
-    "help": {
-      "title": "Trợ giúp",
-      "description": ""
-    },
+
     "error": {
       "500": {
         "title": "Internal Server Error",

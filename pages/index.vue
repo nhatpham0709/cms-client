@@ -1008,5 +1008,17 @@
   </div>
 </template>
 <script>
-export default {}
+export default {
+  head() {
+    return {
+      title: `${this.$t(`meta.dashboard.title`)} | ${this.$config.appName}`,
+      meta: [
+        {
+          name: 'description',
+          content: this.$t('meta.dashboard.description'),
+        },
+      ],
+    }
+  },
+}
 </script>

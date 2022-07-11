@@ -1,8 +1,8 @@
 {
-  "pagination": {
+  "meta": {
     "login": {
       "title": "Login to your account",
-      "description": ""
+      "description": "Login to your account"
     },
     "signUp": {
       "title": "Sign up to NP Meet",
@@ -22,10 +22,6 @@
         "description": ""
       }
     },
-    "index": {
-      "title": "Home",
-      "description": ""
-    },
     "error": {
       "500": {
         "title": "Internal Server Error",
@@ -40,29 +36,25 @@
         "description": ""
       }
     },
+    "dashboard": {
+      "title": "Dashboard",
+      "description": "Dashboard"
+    },
     "profile": {
       "title": "Profile",
-      "description": ""
+      "description": "Manage your profile"
     },
-    "groups": {
-      "title": "Groups",
-      "description": ""
+    "roles": {
+      "title": "Manage roles",
+      "description": "Manage roles"
     },
-    "chat": {
-      "title": "Chat",
-      "description": ""
+    "permissions": {
+      "title": "Manage permissions",
+      "description": "Manage permissions"
     },
-    "exercises": {
-      "title": "Exercises",
-      "description": ""
-    },
-    "calls": {
-      "title": "Calls",
-      "description": ""
-    },
-    "help": {
-      "title": "Help",
-      "description": ""
+    "users": {
+      "title": "Manage users",
+      "description": "Manage users"
     }
   },
   "error": {

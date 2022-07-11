@@ -23,7 +23,7 @@
         </div>
       </div>
       <div>
-        <NuxtImg :src="`/images/${status}.jpeg`" />
+        <NuxtImg :src="`/images/${status}.jpeg`" alt="error" />
       </div>
     </div>
   </div>

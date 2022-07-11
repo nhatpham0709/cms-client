@@ -218,6 +218,17 @@ export default {
       readonly: true,
     }
   },
+  head() {
+    return {
+      title: `${this.$t(`meta.profile.title`)} | ${this.$config.appName}`,
+      meta: [
+        {
+          name: 'description',
+          content: this.$t('meta.profile.description'),
+        },
+      ],
+    }
+  },
   computed: {
     user() {
       return { ...this.$auth.user }

@@ -35,7 +35,9 @@ export default {
   ],
 
   components: true,
-
+  publicRuntimeConfig: {
+    appName: process.env.APP_NAME
+  },
   env: {
     apiUrl: process.env.API_URL,
   },

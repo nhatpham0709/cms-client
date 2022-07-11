@@ -1,6 +1,17 @@
 import { mapState } from 'vuex'
 
 export default {
+  head() {
+    return {
+      title: `${this.$t(`meta.${this.model}.title`)} | ${this.$config.appName}`,
+      meta: [
+        {
+          name: 'description',
+          content: this.$t(`meta.${this.model}.description`),
+        },
+      ],
+    }
+  },
   computed: {
     ...mapState({
       pagination: (state) => state.data.pagination,

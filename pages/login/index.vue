@@ -89,7 +89,17 @@ export default {
       error: '',
     }
   },
-
+  head() {
+    return {
+      title: `${this.$t(`meta.login.title`)} | ${this.$config.appName}`,
+      meta: [
+        {
+          name: 'description',
+          content: this.$t('meta.login.description'),
+        },
+      ],
+    }
+  },
   methods: {
     async login() {
       this.loading = true

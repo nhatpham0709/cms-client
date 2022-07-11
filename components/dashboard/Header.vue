@@ -57,7 +57,7 @@
                 :key="locale.code"
                 :title="locale.name"
                 :to="switchLocalePath(locale.code)"
-                ><img class="h-10 w-10" :src="`/images/${locale.code}.svg`" />
+                ><img class="h-10 w-10" :src="`/images/${locale.code}.svg`" alt="flag" />
               </NuxtLink>
             </a>
           </client-only>
